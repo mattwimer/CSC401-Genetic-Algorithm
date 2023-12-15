@@ -25,8 +25,13 @@ public class GeneticAlgorithm {
         // SELECTION
         for(int i = elitismCount; i < populationSize ; i++){
             // CROSSOVER
-            // i wonder if its critical that the parents are not the same...
-            Individual child = crossover(population.tournament(), population.tournament());
+            Individual child;
+            if(Math.random() <= crossoverRate)
+                // i wonder if its critical that the parents are not the same...
+                child = crossover(population.tournament(), population.tournament());
+            else
+                child = population.getIndividuals()[i]; // if didn't roll chance to crossover, use old generation member
+            
             newGeneration[i] = child;
             // MUTATION
             for(int j = 0 ; j < child.getGenes().length ; j++)
