@@ -77,7 +77,7 @@ public class Population {
             Individual[] last = new Individual[competitors.length/2]; // terrible for the space complexity of this function
             for(int i = 0 ; i < competitors.length/2 ; i++){
                 first[i] = competitors[i];
-                last[i + competitors.length/2] = competitors[i + competitors.length/2]; 
+                last[i] = competitors[i + competitors.length/2]; 
             }
             Individual[] finalists = {compete(first), compete(last)};
             return compete(finalists);

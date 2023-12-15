@@ -30,7 +30,7 @@ public class GeneticAlgorithm {
             else
             child = population.getIndividuals()[i]; // if didn't roll chance to crossover, use old generation member
             
-            newGeneration[i] = child;
+            newGeneration[i - elitismCount] = child;
             // MUTATION
             for(int j = 0 ; j < child.getGenes().length ; j++)
             if(Math.random() <= mutationRate)
@@ -43,7 +43,7 @@ public class GeneticAlgorithm {
         // for(int i = 0 ; i < elitismCount ; i++)
         //     population.getIndividuals()[i] = fittestFromLastGen[i];
         for(int i = 0 ; i < populationSize ; i++)
-            population.getIndividuals()[i] = i < elitismCount ? fittestFromLastGen[i] : newGeneration[i];
+            population.getIndividuals()[i] = i < elitismCount ? fittestFromLastGen[i] : newGeneration[i - elitismCount];
         
         
         
