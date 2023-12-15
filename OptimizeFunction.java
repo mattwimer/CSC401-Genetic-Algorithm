@@ -2,9 +2,9 @@ public class OptimizeFunction {
     public static void main(String[] args) {
         int geneLength = 10; // Number of dimensions for the Rastrigin function
         int populationSize = 100;
-        double mutationRate = 0.01;
+        double mutationRate = 0.03;
         double crossoverRate = 0.9;
-        int elitismCount = 1;
+        int elitismCount = 3;
         int maxGenerations = 1000;
 
         GeneticAlgorithm ga = new GeneticAlgorithm(populationSize, mutationRate, crossoverRate, elitismCount);
