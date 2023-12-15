@@ -45,7 +45,6 @@ public class Population {
         return fittest;
     }
 
-    public void setIndividual()
 
     public Individual[] getIndividuals() {
         return individuals;

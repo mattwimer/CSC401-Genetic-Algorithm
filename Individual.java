@@ -5,8 +5,12 @@ public class Individual {
     public Individual(int geneLength) {
         genes = new double[geneLength];
         for (int i = 0; i < genes.length; i++) {
-            genes[i] = -5.12 + Math.random() * (5.12 - (-5.12)); // Random values between -5.12 and 5.12
+            genes[i] = generateGene();
         }
+    }
+
+    public double generateGene(){ // GENErate hehe
+        return -5.12 + Math.random() * (5.12 - (-5.12)); // Random values between -5.12 and 5.12
     }
 
     public double getFitness() {

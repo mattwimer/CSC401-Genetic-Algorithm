@@ -15,19 +15,29 @@ public class GeneticAlgorithm {
     // These are more complex and depend on your chosen approach for each step
 
     public Population evolvePopulation(Population population){
-        // REPLACEMENT
         // get n = elitismCount of the fittest from population, then generate popSize - n new individuals
         Individual[] fittestFromLastGen = population.getNFittest(elitismCount);
-        for(int i = 0 ; i < populationSize ; i++)
-            population.getIndividuals()[i] = i < elitismCount ? fittestFromLastGen[i] : new Individual(population.getGeneLength());
-
-        // SELECTION
+        for(int i = 0 ; i < elitismCount ; i++)
+            population.getIndividuals()[i] = fittestFromLastGen[i];
         
+        // SELECTION
+        for(int i = elitismCount; i < populationSize ; i++){
+            // CROSSOVER
+            // i wonder if its critical that the parents are not the same...
+            Individual child = crossover(population.tournament(), population.tournament());
 
-        // CROSSOVER
-
-
-        // MUTATION
+            // MUTATION
+            for(int j = 0 ; j < child.getGenes().length ; j++)
+                if(Math.random() <= mutationRate)
+                    child.setGene(j, child.generateGene());
+        }
+        
+        
+        // REPLACEMENT 
+        // I think this happens by replacing individuals with its children?
+        
+        
+        
 
 
         
