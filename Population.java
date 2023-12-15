@@ -1,3 +1,5 @@
+import java.util.HashSet;
+
 public class Population {
     private Individual[] individuals;
     
@@ -51,23 +53,34 @@ public class Population {
     public Individual tournament(){
         int n = 0;
         while((int)Math.pow(2, n) < individuals.length)
+            n++;
+        n--;
+        Individual[] competitors = new Individual[(int)Math.pow(2,n)];
+        HashSet<Integer> competing = new HashSet<Integer>((int)Math.pow(2,n));
+        int i = 0;
+        while(competing.size() != competitors.length){
+            int index = (int)(Math.random() * individuals.length);
+            if(competing.add(index))
+                competitors[i++] = individuals[index];
+        }
 
-
-        return individuals[0];
+        return compete(competitors);
     }
     
     private Individual compete(Individual[] competitors){
         if(competitors.length == 1)
             return competitors[0];
-        else if(competitors.length == 2);
+        else if(competitors.length == 2)
             return competitors[0].getFitness() < competitors[1].getFitness() ? competitors[0] : competitors[1];
         else{
             Individual[] first = new Individual[competitors.length/2]; // kinda too lazy to do this in place, but this is 
             Individual[] last = new Individual[competitors.length/2]; // terrible for the space complexity of this function
             for(int i = 0 ; i < competitors.length/2 ; i++){
-                first[i] = competitors[i]
+                first[i] = competitors[i];
+                last[i + competitors.length/2] = competitors[i + competitors.length/2]; 
             }
-            return {compete(first), compete(last)};
+            Individual[] finalists = {compete(first), compete(last)};
+            return compete(finalists);
         }
     }
     
