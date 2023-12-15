@@ -1,11 +1,13 @@
 public class Population {
     private Individual[] individuals;
+    
+    
     private int geneLength;
 
     public int getGeneLength() {
         return geneLength;
     }
-
+    
     public Population(int populationSize, int geneLength) {
         this.geneLength = geneLength;
         individuals = new Individual[populationSize];
@@ -13,7 +15,7 @@ public class Population {
             individuals[i] = new Individual(geneLength);
         }
     }
-
+    
     public Individual getFittest() {
         Individual fittest = individuals[0];
         for (int i = 1; i < individuals.length; i++) {
@@ -23,7 +25,7 @@ public class Population {
         }
         return fittest;
     }
-
+    
     /**
      * @param n number of the best individuals to return
      * @return array of size n containing the n most fit individuals in this class's arr of individuals
@@ -41,12 +43,39 @@ public class Population {
                     fittest[j] = individuals[i];
                     individuals[i] = temp;
                 }
-
+        
         return fittest;
     }
 
+    // large tournament sizes are better I think? so pick largest n such that 2^n < popSize and create brackets
+    public Individual tournament(){
+        int n = 0;
+        while((int)Math.pow(2, n) < individuals.length)
 
+
+        return individuals[0];
+    }
+    
+    private Individual compete(Individual[] competitors){
+        if(competitors.length == 1)
+            return competitors[0];
+        else if(competitors.length == 2);
+            return competitors[0].getFitness() < competitors[1].getFitness() ? competitors[0] : competitors[1];
+        else{
+            Individual[] first = new Individual[competitors.length/2]; // kinda too lazy to do this in place, but this is 
+            Individual[] last = new Individual[competitors.length/2]; // terrible for the space complexity of this function
+            for(int i = 0 ; i < competitors.length/2 ; i++){
+                first[i] = competitors[i]
+            }
+            return {compete(first), compete(last)};
+        }
+    }
+    
     public Individual[] getIndividuals() {
         return individuals;
+    }
+
+    public void setIndividuals(Individual[] individuals) {
+        this.individuals = individuals;
     }
 }
